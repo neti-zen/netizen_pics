@@ -11,20 +11,20 @@ import 'package:photo_view/photo_view.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:network_to_file_image/network_to_file_image.dart';
 
-int version = 5114;
+import 'package:screen/screen.dart';
+
+int version = 5115;
 
 // Url of public folder in Mailru cloud
-String mailru_url='https://cloud.mail.ru/public/NNNN/ZZZZZZZZZ';
-
-
-String image_path='/storage/emulated/0/_some_local_dir_/1.jpg';
-
+String mailru_url='https://cloud.mail.ru/public/NNNN/VVVVVVVVV';
+String image_path='/_n0n-eXiStEnT';
+String tmp_img_filename='netizen_pics.jpg';
 
 String mailru_base='https://cloud.mail.ru/public/';
 
 var randomizer; 
 
-String real_url;
+String real_url='https://img.imgsmail.ru/cloud/img/share.jpg';
 
 List<String> pic_list =  [];
 
@@ -100,13 +100,14 @@ next_pic() async {
     xrnd_number=randomizer.nextInt(pic_list.length);
     String pic_urlpath=pic_list[xrnd_number];
     await get_real_pic_url(pic_urlpath);
+
+    Screen.keepOn(true);
 }
 
 void main() {
 
   randomizer = new Random();
 
-  tmpFile=new File(image_path);
   get_filelist();
 
   final scheduler = NeatPeriodicTaskScheduler(
@@ -151,8 +152,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Timer _refreshtimer;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
+
+     Directory tempDir=await getApplicationDocumentsDirectory();
+     String tempPath=tempDir.path;
+     image_path=tempPath + '/' + tmp_img_filename;
+     tmpFile=new File(image_path);
+
     _refreshtimer=Timer.periodic(Duration(seconds: 90),(Timer t) {
        setState(() {
          next_pic();
