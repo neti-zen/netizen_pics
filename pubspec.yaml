@@ -1,0 +1,28 @@
+name: netizen_pics
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  http: ^0.12.2
+  neat_periodic_task: ^1.0.1
+  photo_view: ^0.10.3
+  path_provider: ^1.6.24
+  network_to_file_image: ^2.3.6
+  screen: ^0.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
